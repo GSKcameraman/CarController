@@ -1,13 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum DriveType{
     FWD,
     RWD,
     AWD
 }
+
+
 public class CarController : MonoBehaviour
 {
     public WheelColliders wheelColliders;
@@ -35,6 +41,23 @@ public class CarController : MonoBehaviour
     private float speed;
 
     public AnimationCurve steeringCurve;
+    public AnimationCurve engineCurve;
+
+    
+
+    public float[] gears;
+    int currentGear = 1;
+    public float maxRPM = 8000f;
+    public float RPMLower = 1000f;
+    public float RPMUpper = 3000f;
+    float lastRPM = 0;
+    //UI
+    public TMP_Text speedText;
+    public Slider RPMslider;
+
+    public TMP_Text gearText;
+
+    public AudioSource engineSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,9 +85,15 @@ public class CarController : MonoBehaviour
     }
     void FixedUpdate() {
         UpdateWheels();
+        AutoShifting();
         Drive();
         Steering();
         ApplyBrake();
+        speedText.text = (rb.velocity.magnitude * 3.6).ToString("0");
+        float rpmRatio = getRPM()/maxRPM;
+        RPMslider.value = rpmRatio;
+        engineSound.pitch = 1 + rpmRatio * 2;
+
     }
 
     void getInput(){
@@ -109,20 +138,22 @@ public class CarController : MonoBehaviour
         }
     }
     void RearTorque(){
-        wheelColliders.RLWheel.motorTorque = gas * motorpow;
-        wheelColliders.RRWheel.motorTorque = gas * motorpow;
+        float realpow = motorpow * engineCurve.Evaluate(getRPM()/maxRPM);
+        wheelColliders.RLWheel.motorTorque = gas * realpow * 0.5f;
+        wheelColliders.RRWheel.motorTorque = gas * realpow * 0.5f;
     }
     void FrontTorque(){
-        wheelColliders.FLWheel.motorTorque = gas * motorpow;
-        wheelColliders.FRWheel.motorTorque = gas * motorpow;
+        float realpow = motorpow * engineCurve.Evaluate(getRPM()/maxRPM);
+        wheelColliders.FLWheel.motorTorque = gas * realpow * 0.5f;
+        wheelColliders.FRWheel.motorTorque = gas * realpow * 0.5f;
     }
 
     void AllTorque(){
-
-        wheelColliders.RLWheel.motorTorque = gas * motorpow * splitRatio;
-        wheelColliders.RRWheel.motorTorque = gas * motorpow * splitRatio;
-        wheelColliders.FLWheel.motorTorque = gas * motorpow * (1.0f - splitRatio);
-        wheelColliders.FRWheel.motorTorque = gas * motorpow * (1.0f - splitRatio);
+        float realpow = motorpow * engineCurve.Evaluate(getRPM()/maxRPM);
+        wheelColliders.RLWheel.motorTorque = gas * realpow * splitRatio * 0.5f;
+        wheelColliders.RRWheel.motorTorque = gas * realpow * splitRatio * 0.5f;
+        wheelColliders.FLWheel.motorTorque = gas * realpow * (1.0f - splitRatio) * 0.5f;
+        wheelColliders.FRWheel.motorTorque = gas * realpow * (1.0f - splitRatio) * 0.5f;
 
     }
 
@@ -147,6 +178,53 @@ public class CarController : MonoBehaviour
         collider.GetWorldPose(out pos, out quat);
         mesh.transform.position = pos;
         mesh.transform.rotation = quat;
+    }
+
+    float getRPM(){
+        WheelCollider wheelL;
+        WheelCollider wheelR;
+        if (driveType == DriveType.FWD){
+            wheelL = wheelColliders.FLWheel;
+            wheelR = wheelColliders.FRWheel;
+        }
+        else{
+            wheelL = wheelColliders.RLWheel;
+            wheelR = wheelColliders.RRWheel;
+        }
+        float rpm = Math.Min(Math.Abs(wheelL.rpm) , Math.Abs(wheelR.rpm)) * gears[currentGear + 1] * 3;
+        float rpmLerp = Mathf.Lerp(lastRPM,rpm,Time.deltaTime * 1.0f);
+        if (rpmLerp < RPMLower * 0.8f){
+            rpmLerp = RPMLower * 0.8f;
+        }
+        else if (rpmLerp > maxRPM * 1.1f){
+            rpmLerp = maxRPM * 0.9f;
+        }
+        
+        lastRPM = rpmLerp;
+        return rpmLerp;
+        
+        
+    }
+
+    void AutoShifting(){
+        float RPM = getRPM();
+        if (gas < 0){
+            currentGear = -1;
+            gearText.text = "R";
+        }
+        else if (gas > 0 && currentGear <= 0){
+            currentGear = 1;
+            gearText.text = currentGear.ToString();
+        }
+        if (RPM < RPMLower && currentGear > 1){
+            currentGear--;
+            gearText.text = currentGear.ToString();
+        }
+        else if (RPM > RPMUpper && currentGear < gears.Length - 2 && gas > 0){
+            currentGear ++;
+            gearText.text = currentGear.ToString();
+
+        }
     }
 }
 
