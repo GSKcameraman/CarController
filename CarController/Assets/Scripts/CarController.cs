@@ -85,10 +85,11 @@ public class CarController : MonoBehaviour
     }
     void FixedUpdate() {
         UpdateWheels();
-        AutoShifting();
+
         Drive();
         Steering();
         ApplyBrake();
+        AutoShifting();
         speedText.text = (rb.velocity.magnitude * 3.6).ToString("0");
         float rpmRatio = getRPM()/maxRPM;
         RPMslider.value = rpmRatio;
@@ -191,23 +192,37 @@ public class CarController : MonoBehaviour
             wheelL = wheelColliders.RLWheel;
             wheelR = wheelColliders.RRWheel;
         }
-        float rpm = Math.Min(Math.Abs(wheelL.rpm) , Math.Abs(wheelR.rpm)) * gears[currentGear + 1] * 3;
-        float rpmLerp = Mathf.Lerp(lastRPM,rpm,Time.deltaTime * 1.0f);
+        float rpm = Mathf.Min(Mathf.Abs(wheelL.rpm) , Mathf.Abs(wheelR.rpm)) * gears[currentGear + 1] * 3;
+        float rpmLerp = Mathf.Lerp(lastRPM,rpm, 0.2f);
+        
         if (rpmLerp < RPMLower * 0.8f){
             rpmLerp = RPMLower * 0.8f;
         }
         else if (rpmLerp > maxRPM * 1.1f){
-            rpmLerp = maxRPM * 0.9f;
+            rpmLerp = maxRPM * 0.95f;
         }
         
         lastRPM = rpmLerp;
         return rpmLerp;
         
+
+        /*
+        if (rpm < RPMLower * 0.8f){
+            rpm = RPMLower * 0.8f;
+        }
+        else if (rpm > maxRPM * 1.1f){
+            rpm = maxRPM * 0.9f;
+        }
+        
+        lastRPM = rpm;
+        return rpm;
+        */
         
     }
 
     void AutoShifting(){
-        float RPM = getRPM();
+        //float RPM = getRPM();
+        float RPM = lastRPM;
         if (gas < 0){
             currentGear = -1;
             gearText.text = "R";

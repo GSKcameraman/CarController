@@ -92,8 +92,8 @@ MonoBehaviour:
   driveType: 1
   splitRatio: 0.761
   brakeRatio: 0.655
-  motorpow: 1000
-  brakePow: 8000
+  motorpow: 2000
+  brakePow: 10000
   fourWheelSteer: 0
   rearSteerDamping: 0.2
   steeringCurve:
@@ -101,7 +101,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0.1423416
-      value: 48.935818
+      value: 49.17159
       inSlope: -2.360599
       outSlope: -2.360599
       tangentMode: 0
@@ -118,8 +118,17 @@ MonoBehaviour:
       inWeight: 0.2106502
       outWeight: 0.20143662
     - serializedVersion: 3
-      time: 40.33722
-      value: 0.5707921
+      time: 39.975006
+      value: 2.3043737
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 80.14858
+      value: 1.6272733
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -151,19 +160,28 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.26826316
     - serializedVersion: 3
-      time: 0.9966622
-      value: 0.70075405
+      time: 0.97664267
+      value: 0.41564357
       inSlope: -3.5296745
       outSlope: -3.5296745
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.1760033
       outWeight: 0
+    - serializedVersion: 3
+      time: 1.001335
+      value: -0.006126237
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   gears:
-  - 4
+  - 15
   - 0
   - 3
   - 2
@@ -171,7 +189,7 @@ MonoBehaviour:
   - 0.7
   - 0.5
   maxRPM: 8000
-  RPMLower: 500
+  RPMLower: 800
   RPMUpper: 3000
   speedText: {fileID: 0}
   RPMslider: {fileID: 0}
@@ -187,7 +205,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bc158d549ece4ed4a93b49023a13ca42, type: 3}
+  m_audioClip: {fileID: 8300000, guid: da205aafed18dac44b0e7a4f9a093123, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -328,7 +346,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 0.9
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 0.8
@@ -482,7 +500,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 0.9
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 0.8
@@ -636,7 +654,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 0.9
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 0.8
@@ -790,7 +808,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 0.9
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 0.8

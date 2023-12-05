@@ -427,7 +427,7 @@ MonoBehaviour:
   speedText: {fileID: 0}
   RPMslider: {fileID: 0}
   gearText: {fileID: 0}
-  engineSound: {fileID: 0}
+  engineSound: {fileID: 4387582899239195234}
 --- !u!82 &4387582899239195234
 AudioSource:
   m_ObjectHideFlags: 0
@@ -438,11 +438,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bc158d549ece4ed4a93b49023a13ca42, type: 3}
+  m_audioClip: {fileID: 8300000, guid: da205aafed18dac44b0e7a4f9a093123, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

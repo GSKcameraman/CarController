@@ -751,10 +751,10 @@ MonoBehaviour:
   driveType: 2
   splitRatio: 0.8
   brakeRatio: 0.7
-  motorpow: 1000
-  brakePow: 5000
+  motorpow: 2000
+  brakePow: 20000
   fourWheelSteer: 1
-  rearSteerDamping: 1
+  rearSteerDamping: 0.8
   steeringCurve:
     serializedVersion: 2
     m_Curve:
@@ -846,11 +846,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bc158d549ece4ed4a93b49023a13ca42, type: 3}
+  m_audioClip: {fileID: 8300000, guid: da205aafed18dac44b0e7a4f9a093123, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
