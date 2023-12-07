@@ -89,19 +89,19 @@ MonoBehaviour:
   gas: 0
   brake: 0
   steering: 0
-  driveType: 1
-  splitRatio: 0.761
+  driveType: 2
+  splitRatio: 0.8
   brakeRatio: 0.655
   motorpow: 2000
-  brakePow: 10000
-  fourWheelSteer: 0
+  brakePow: 20000
+  fourWheelSteer: 1
   rearSteerDamping: 0.2
   steeringCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.1423416
-      value: 49.17159
+      time: -0.024787918
+      value: 60.498005
       inSlope: -2.360599
       outSlope: -2.360599
       tangentMode: 0
@@ -109,8 +109,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.1697786
     - serializedVersion: 3
-      time: 10.433441
-      value: 9.803116
+      time: 11.272072
+      value: 10.395142
       inSlope: -0.87453985
       outSlope: -0.87453985
       tangentMode: 0
@@ -118,8 +118,8 @@ MonoBehaviour:
       inWeight: 0.2106502
       outWeight: 0.20143662
     - serializedVersion: 3
-      time: 39.975006
-      value: 2.3043737
+      time: 40.603973
+      value: 3.48841
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -127,8 +127,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 80.14858
-      value: 1.6272733
+      time: 118.92797
+      value: 2.8512623
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -346,7 +346,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 0.9
+    m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 0.8
@@ -500,7 +500,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 0.9
+    m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 0.8
@@ -654,7 +654,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 0.9
+    m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 0.8
@@ -808,7 +808,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 0.9
+    m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 0.8
